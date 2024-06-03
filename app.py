@@ -3,6 +3,23 @@ import pickle
 import requests
 from fuzzywuzzy import process
 
+repo_owner = 'SanjeevM2004'
+repo_name = 'Movie_recommender'
+release_tag = 'Similaritymodel'
+movie_list_url = f'https://github.com/{repo_owner}/{repo_name}/releases/download/{release_tag}/movie_list.pkl'
+similarity_url = f'https://github.com/{repo_owner}/{repo_name}/releases/download/{release_tag}/similarity.pkl'
+
+def download_file(url, filename):
+    response = requests.get(url)
+    with open(filename, 'wb') as file:
+        file.write(response.content)
+
+# Download files from GitHub release
+if not os.path.exists('movie_list.pkl'):
+    download_file(movie_list_url, 'movie_list.pkl')
+if not os.path.exists('similarity.pkl'):
+    download_file(similarity_url, 'similarity.pkl')
+
 # Load the models
 movie_list = pickle.load(open('movie_list.pkl', 'rb'))
 similarity = pickle.load(open('similarity.pkl', 'rb'))
