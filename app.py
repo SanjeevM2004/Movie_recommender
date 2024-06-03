@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import requests
 from fuzzywuzzy import process
+import os
 
 repo_owner = 'SanjeevM2004'
 repo_name = 'Movie_recommender'
